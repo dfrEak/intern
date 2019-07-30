@@ -26,7 +26,7 @@ def getPageCount(target_url):
 
 
 # from A1301 to A1331 (Tokyo area)
-for area in range(7, 31):
+for area in range(8, 32):
 
     # web url using response
     target_url = "https://tabelog.com/tokyo/A13"+format(area, '02d')
@@ -39,7 +39,7 @@ for area in range(7, 31):
     #for pageList in range(51,pageCount+1):
     #for pageList in range(43,44):
     # somehow all area only can search page 1 to 60
-    for pageList in range(1,page):
+    for pageList in range(4,page):
         save_webpage(
             url="https://tabelog.com/tokyo/A13"+format(area, '02d')+"/rstLst/"+str(pageList)+"/",
             project_folder=folder,
@@ -50,3 +50,10 @@ for area in range(7, 31):
 #########################################################
 #NOTE : Before run, they will open a lot of pages
 #########################################################
+
+
+#save web only
+#from urllib.request import urlopen
+#html = urlopen("http://www.google.com/")
+#with open('page_content.html', 'w') as fid:
+    #fid.write(html)
