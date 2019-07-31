@@ -36,7 +36,7 @@ class tools:
             ファイルテキスト
         """
         retval=[]
-        f= open(filename,"r")
+        f= open(filename,"r",encoding="utf-8_sig")
 
         for line in f.readlines():
             # -1 to discard last \n
@@ -53,4 +53,4 @@ class tools:
 if __name__ == "__main__":
     print("tools")
 
-    print(tools.read("../result_avg.txt")[0])
+    print(tools.read("../result.txt")[0])
