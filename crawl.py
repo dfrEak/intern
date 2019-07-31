@@ -47,16 +47,19 @@ def convertHodai(hodaiBs4):
             retval[1]=text
     return retval
 
-def soupCrawl(target_file,area_code):
+def soupCrawl(target_file,area_code,page):
     """
     crawling the information from file
     ファイルから情報をクロールする
     :param target_file: str
         file that want to crawl
         クロールしたいファイル
-    :param area_code:
+    :param area_code: str
         the area code
         エリアコード
+    :param page: str
+        page
+        ページ
     :return:
     """
     # web url using response
@@ -93,7 +96,7 @@ def soupCrawl(target_file,area_code):
         # 名前
         name = r.find("a", class_="list-rst__rst-name-target cpy-rst-name")
         if (name is not None):
-            nameList.append(name.text)
+            nameList.append(name.text.replace("\t"," "))
         else:
             nameList.append("-")
 
@@ -151,7 +154,7 @@ def soupCrawl(target_file,area_code):
     # 合計情報を印刷する
     result=""
     for i in range(0, len(nameList)):
-        text=area_name+"\t"+area_code+"\t"+nameList[i]+"\t"+\
+        text=area_name+"\t"+area_code+"\t"+str(page)+"\t"+nameList[i]+"\t"+\
              ratingList[i]+"\t"+commentList[i]+"\t"+\
              dinnerMinList[i]+"\t"+dinnerMaxList[i]+"\t"+\
              lunchMinList[i]+"\t"+lunchMaxList[i]+"\t"+\
@@ -192,7 +195,7 @@ def extractWebFull():
         area_code = "A1301"
         target_file = folder+"/tabelog/tabelog.com/tokyo/A1301/rstLst/"+str(pageList)+"/index.html"
         print(pageList)
-        soupCrawl(target_file,area_code)
+        soupCrawl(target_file, area_code, pageList)
 
 def extractWebPage():
     """
@@ -216,9 +219,9 @@ def extractWebPage():
 
             # some areas have results below 1200 (60 pages)
             # 一部の地域では1200を下回る結果が出ています（60ページ）
-            soupCrawl(target_file, area_code)
+            #soupCrawl(target_file, area_code, page)
             try:
-                soupCrawl(target_file, area_code)
+                soupCrawl(target_file, area_code, page)
             except:
                 print(target_file+" not found")
 
