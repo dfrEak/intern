@@ -5,12 +5,21 @@ from bs4 import BeautifulSoup
 import math
 from urllib.request import urlopen
 
-folder = "C:/Users/bpd-staff/Documents/Eric/download"
+folder = "C:/Users/bpd-staff/Documents/Eric/download_page"
 #folder = "D:/intern/download/download"
 
-# get page count by calculate all restaurant divided by 20
-# すべてのレストランを20で割って計算してページ数を取得する
+
 def getPageCount(target_url):
+    """
+    get page count by calculate all restaurant divided by 20
+    すべてのレストランを20で割って計算してページ数を取得する
+    :param target_url: str
+        url that we want to download
+        ダウンロードしたいURL
+    :return: int
+        the number of pages
+        ページ数
+    """
     response = requests.get(target_url)
 
     soup = BeautifulSoup(response.text, "html.parser")
@@ -27,9 +36,19 @@ def getPageCount(target_url):
     print(pageCount)
     return pageCount
 
-# download the full web (not only page)
-# Web全体をダウンロードする（ページだけでなく）
+
 def getWebFull(target_url, folder):
+    """
+    download the full web (not only page)
+    Web全体をダウンロードする（ページだけでなく）
+    :param target_url: str
+        url that we want to download
+        ダウンロードしたいURL
+    :param folder: str
+        folder we want to save
+        保存したいフォルダ
+    :return: -
+    """
     kwargs = {'project_name': 'tabelog'}
     save_webpage(
         url=target_url,
@@ -41,9 +60,19 @@ def getWebFull(target_url, folder):
     #NOTE : 実行する前に、たくさんのページが開きます
     #########################################################
 
-# download web page only
-# Webページのみをダウンロードする
+
 def getWebPage(target_url,name):
+    """
+    download web page only
+    Webページのみをダウンロードする
+    :param target_url: str
+        url that we want to download
+        ダウンロードしたいURL
+    :param name: str
+        filename we want to save
+        保存したいファイル
+    :return: -
+    """
     html = urlopen(target_url).read().decode('utf8')
     with open(name, 'w', encoding="utf-8") as fid:
         fid.write(html)
