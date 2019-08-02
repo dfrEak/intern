@@ -1,9 +1,8 @@
-#import requests
 from bs4 import BeautifulSoup
 from tools import tools
-import time
+from config import config
 
-folder = "C:/Users/bpd-staff/Documents/Eric/download_page"
+
 
 def convertPrice(price):
     """
@@ -66,6 +65,7 @@ def soupCrawl(target_file,area_code,page):
     # レスポンスを使ったウェブURL
     #response = requests.get(target_url)
 
+    # local file use open
     # ローカルファイル使用オープン
     soup = BeautifulSoup(open(target_file, encoding="utf-8"), "html.parser")
 
@@ -177,32 +177,16 @@ def soupCrawl(target_file,area_code,page):
     #time.sleep(1)
 
 
-
-def extractWebFull():
-    """
-    web full extraction
-    Webフル抽出
-    :return: -
-    """
-    # area A1301 first page
-    # エリアA1301の最初のページ
-    target_file = folder+"/tabelog/tabelog.com/tokyo/A1301/index.html"
-    soupCrawl(target_file)
-
-    # area A1301 2nd page to 60th page
-    # エリアA1301 2〜60ページ
-    for pageList in range(2, 61):
-        area_code = "A1301"
-        target_file = folder+"/tabelog/tabelog.com/tokyo/A1301/rstLst/"+str(pageList)+"/index.html"
-        print(pageList)
-        soupCrawl(target_file, area_code, pageList)
-
 def extractWebPage():
     """
     web page extraction
     Webページの抽出
     :return: -
     """
+    # getting folder path from config file
+    # 設定ファイルからフォルダパスを取得する
+    folder = config.config['DOWNLOAD']['FOLDER']
+
     # from A1301 to A1331 (Tokyo area)
     # A1301から A1331まで（東京エリア）
     for area in range(1, 32):
@@ -222,7 +206,7 @@ def extractWebPage():
             #soupCrawl(target_file, area_code, page)
             try:
                 soupCrawl(target_file, area_code, page)
-            except:
+            except FileNotFoundError:
                 print(target_file+" not found")
 
 
@@ -233,6 +217,5 @@ def extractWebPage():
 ##########################################################################################################
 ##########################################################################################################
 ##########################################################################################################
-
 
 extractWebPage()
