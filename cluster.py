@@ -3,6 +3,8 @@ from tools import tools
 import matplotlib.mlab as mlab
 import matplotlib.pyplot as plt
 import numpy as np
+from config import config
+from stringtable import stringTable
 
 
 def columnFloat(matrix, i, decimal):
@@ -18,8 +20,8 @@ def columnFloat(matrix, i, decimal):
 def column(matrix, i):
     return [row[i] for row in matrix]
 
-def histogram(data):
-    cleandata=columnFloat(data, 4, 2)
+def histogram(data, arrayNum, title, xLabel, yLabel):
+    cleandata=columnFloat(data, arrayNum, 2)
     #mu, sigma = 100, 15
     mu, sigma = (np.mean(cleandata), np.std(cleandata))
 
@@ -29,11 +31,11 @@ def histogram(data):
 
     # add a 'best fit' line
     y = mlab.normpdf( bins, mu, sigma)
-    l = plt.plot(bins, y, 'r--', linewidth=10)
+    l = plt.plot(bins, y, 'r--', linewidth=1)
 
-    plt.xlabel('Rating')
-    plt.ylabel('Count')
-    plt.title("Rating Distribution")
+    plt.xlabel(xLabel)
+    plt.ylabel(yLabel)
+    plt.title(title)
     #plt.axis([0, 8, 0, 10])
     plt.grid(True)
 
@@ -46,9 +48,10 @@ def histogram(data):
 ##########################################################################################################
 ##########################################################################################################
 
-data = tools.read("../result.txt")
+data = tools.read(config.config['CRAWL']['FILENAME'])
 #recounted = Counter(column(data,1))
 #print(recounted)
 
 
-histogram(data)
+histogram(data, stringTable.RESULT_RATING, "Rating Distribution", "Rating", "Count")
+histogram(data, stringTable.RESULT_COMMENT, "Comment Count Distribution", "Comment Count", "Count")
