@@ -170,7 +170,7 @@ def soupCrawl(target_file,area_code,page):
 
     # save file
     # ファイルを保存
-    tools.save("../result.txt",result)
+    tools.save(config.config['CRAWL']['FILENAME'],result)
 
     # sleep 1 second
     # 次のダウンロードに1秒を与える
@@ -218,4 +218,6 @@ def extractWebPage():
 ##########################################################################################################
 ##########################################################################################################
 
+savedFile = config.config['CRAWL']['FILENAME']
+tools.clearFile(savedFile)
 extractWebPage()

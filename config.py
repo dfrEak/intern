@@ -11,7 +11,7 @@ class config:
     # パラメータ
     config = configparser.ConfigParser()
 
-    config.read((Path(__file__).absolute().parent / "conf.ini").as_posix())
+    config.read((Path(__file__).absolute().parent / "conf.ini").as_posix(),encoding="utf-8_sig")
 
     # set the path
     # パスを設定

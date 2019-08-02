@@ -44,6 +44,19 @@ class tools:
 
         return retval
 
+    @staticmethod
+    def clearFile(filename):
+        """
+        make file clear
+        ファイルを明確にする
+        :param filename: str
+            filename
+            ファイルの名前
+        :return: -
+        """
+        open(filename, 'w').close()
+        print("Clear file")
+
 ##########################################################################################################
 ##########################################################################################################
 ##########################################################################################################
@@ -54,3 +67,4 @@ if __name__ == "__main__":
     print("tools")
 
     print(tools.read("../result.txt")[0])
+    tools.clearFile("../test.txt")
