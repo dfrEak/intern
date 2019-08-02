@@ -7,7 +7,6 @@ class config:
     """
     config class
     """
-
     # parameter
     # パラメータ
     config = configparser.ConfigParser()
