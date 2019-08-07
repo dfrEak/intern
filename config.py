@@ -12,14 +12,16 @@ class config:
     config = configparser.ConfigParser()
 
     config.read((Path(__file__).absolute().parent / "conf.ini").as_posix(),encoding="utf-8_sig")
+    parent = Path(__file__).parent.parent
 
     # set the path
     # パスを設定
-    config['DOWNLOAD']['FOLDER']=str(Path(__file__).parent.parent / config['DOWNLOAD']['FOLDER'])
-    config['CRAWL']['FILENAME']=str(Path(__file__).parent.parent / config['CRAWL']['FILENAME'])
+    config['DOWNLOAD']['FOLDER']=str(parent / config['DOWNLOAD']['FOLDER'])
+    config['CRAWL']['FILENAME']=str(parent / config['CRAWL']['FILENAME'])
 
     def __init__(self):
         pass
+
 
 
 if __name__ == "__main__":

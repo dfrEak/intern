@@ -15,11 +15,11 @@ class stringTable:
     RESULT_DINNER_MIN=6
     RESULT_DINNER_MAX=7
     RESULT_LUNCH_MIN=8
-    RESULT_LUNCH_MAX=10
-    RESULT_DINNER_AVG=11
-    RESULT_LUNCH_AVG=12
-    RESULT_NOMIHODAI=13
-    RESULT_TABEHODAI=14
+    RESULT_LUNCH_MAX=9
+    RESULT_DINNER_AVG=10
+    RESULT_LUNCH_AVG=11
+    RESULT_NOMIHODAI=12
+    RESULT_TABEHODAI=13
 
 
 ##########################################################################################################
