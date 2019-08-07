@@ -13,7 +13,6 @@ from config import config
 from stringtable import stringTable
 
 def columnFloat(matrix, i, decimal):
-    #return [round(float(row[i]),decimal) for row in matrix]
     retval=[]
     for row in matrix:
         try:
@@ -46,8 +45,8 @@ def histogram(data, arrayNum, title, xLabel, yLabel):
 def kmean(data, ncluster):
     #df = DataFrame(data,columns=['a','b','c','d','e','f','g','h','i','j','k','l','m','n'])
     #df = DataFrame(data,columns=['a','b','c','d','e'])
-    df = DataFrame(data,columns=['a','b','c','d','e','f','g'])
-    print(df)
+    df = DataFrame(data)
+    #print(df)
 
     kmeans = KMeans(n_clusters=ncluster).fit(df)
     centroids = kmeans.cluster_centers_
@@ -62,7 +61,8 @@ def kmean(data, ncluster):
 
 def kmean_clusters(data):
     #df = DataFrame(data,columns=['a','b','c','d','e'])
-    df = DataFrame(data,columns=['a','b','c','d','e','f','g'])
+    #df = DataFrame(data,columns=['a','b','c','d','e','f','g'])
+    df = DataFrame(data)
     print(df)
     Sum_of_squared_distances = []
     K = range(1, 15)
@@ -83,7 +83,7 @@ def kmean_clusters(data):
 ##########################################################################################################
 ##########################################################################################################
 
-data = tools.read(str(config.parent / "dinner_persen.txt"))
+#data = tools.read(str(config.parent / "dinner_persen.txt"))
 #subdata = {'x': tools.column(data,10),
 #               'y': tools.column(data, 11)}
 
@@ -97,9 +97,14 @@ data = tools.read(str(config.parent / "dinner_persen.txt"))
 #histogram(data, stringTable.RESULT_RATING, "Rating Distribution", "Rating", "Count")
 #histogram(data, stringTable.RESULT_COMMENT, "Comment Count Distribution", "Comment Count", "Count")
 
-kmean_clusters(data)
-
-# lunch=5
-#kmean(data,5)
-# dinner = 7
-kmean(data,7)
+#kmean_clusters(data)
+print("##################################################################################################################")
+print("lunch:")
+lunch = tools.read(str(config.parent / "lunch_percent.txt"))
+#kmean_clusters(lunch)
+kmean(lunch,3)
+print("##################################################################################################################")
+print("dinner:")
+dinner = tools.read(str(config.parent / "dinner_percent.txt"))
+#kmean_clusters(dinner)
+kmean(dinner,6)
