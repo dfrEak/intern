@@ -13,6 +13,20 @@ from config import config
 from stringtable import stringTable
 
 def columnFloat(matrix, i, decimal):
+    """
+    get the i column of the matrix
+    行列のi列を取得します
+    :param matrix: array
+        matrix
+        マトリックス
+    :param i: int
+        number of array
+        配列の数
+    :param decimal: int
+        how many decimal
+        小数
+    :return: -
+    """
     retval=[]
     for row in matrix:
         try:
@@ -22,15 +36,37 @@ def columnFloat(matrix, i, decimal):
     return retval
 
 def histogram(data, arrayNum, title, xLabel, yLabel):
+    """
+    histogram generator
+    ヒストグラムジェネレーター
+    :param data: array
+        data
+        データ
+    :param arrayNum: int
+        number of array
+        配列の数
+    :param title: str
+        graph title
+        グラフのタイトル
+    :param xLabel: str
+        graph x label
+        グラフのxのラベル
+    :param yLabel: str
+        graph y label
+        グラフのyのラベル
+    :return: -
+    """
     cleandata=columnFloat(data, arrayNum, 2)
     #mu, sigma = 100, 15
     mu, sigma = (np.mean(cleandata), np.std(cleandata))
 
     # the histogram of the data
+    # データのヒストグラム
     n, bins, patches = plt.hist(cleandata, bins=50, density=0, facecolor='green', alpha=0.75)
     #n, bins, patches = plt.hist([1,1,1,1,2,3,5,6,5,5,5,5,6,3,2,2,2,1], bins=50, normed=1, facecolor='green', alpha=0.75)
 
     # add a 'best fit' line
+    # 「最適な」行を追加する
     y = mlab.normpdf( bins, mu, sigma)
     l = plt.plot(bins, y, 'r--', linewidth=1)
 
@@ -43,6 +79,17 @@ def histogram(data, arrayNum, title, xLabel, yLabel):
     plt.show()
 
 def kmean(data, ncluster):
+    """
+    generate kmean clustering
+    kmeanクラスタリングを生成する
+    :param data: array
+        data
+        データ
+    :param ncluster:
+        number of cluster
+        クラスタの数
+    :return: -
+    """
     #df = DataFrame(data,columns=['a','b','c','d','e','f','g','h','i','j','k','l','m','n'])
     #df = DataFrame(data,columns=['a','b','c','d','e'])
     df = DataFrame(data)
@@ -59,7 +106,15 @@ def kmean(data, ncluster):
     #plt.scatter(centroids[:, 0], centroids[:, 1], c='red', s=50)
     #plt.show()
 
-def kmean_clusters(data):
+def kmean_check(data):
+    """
+    checking for each kmean cluster
+    kmeanクラスターの確認
+    :param data: array
+        data
+        データ
+    :return: -
+    """
     #df = DataFrame(data,columns=['a','b','c','d','e'])
     #df = DataFrame(data,columns=['a','b','c','d','e','f','g'])
     df = DataFrame(data)
@@ -83,28 +138,24 @@ def kmean_clusters(data):
 ##########################################################################################################
 ##########################################################################################################
 
-#data = tools.read(str(config.parent / "dinner_persen.txt"))
-#subdata = {'x': tools.column(data,10),
-#               'y': tools.column(data, 11)}
-
-#temp = {'x': [25,34,22,27,33,33,31,22,35,34,67,54,57,43,50,57,59,52,65,47,49,48,35,33,44,45,38,43,51,46],
-#        'y': [79,51,53,78,59,74,73,57,69,75,51,32,40,47,53,36,35,58,59,50,25,20,14,12,20,5,29,27,8,7]
-#       }
-#recounted = Counter(column(data,1))
-#print(recounted)
-
 
 #histogram(data, stringTable.RESULT_RATING, "Rating Distribution", "Rating", "Count")
 #histogram(data, stringTable.RESULT_COMMENT, "Comment Count Distribution", "Comment Count", "Count")
 
-#kmean_clusters(data)
 print("##################################################################################################################")
 print("lunch:")
 lunch = tools.read(str(config.parent / "lunch_percent.txt"))
-#kmean_clusters(lunch)
+#kmean_check(lunch)
 kmean(lunch,3)
+
 print("##################################################################################################################")
 print("dinner:")
 dinner = tools.read(str(config.parent / "dinner_percent.txt"))
-#kmean_clusters(dinner)
+#kmean_check(dinner)
 kmean(dinner,6)
+
+print("##################################################################################################################")
+print("dinner nomihoidai:")
+dinner_nomi = tools.read(str(config.parent / "dinner_nomi_percent.txt"))
+#kmean_check(dinner_nomi)
+kmean(dinner_nomi,3)
