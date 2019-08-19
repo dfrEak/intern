@@ -74,6 +74,7 @@ def soupCrawl(target_file,area_code,page):
     # list
     # リスト
     nameList = []
+    ekiList = []
     ratingList = []
     commentList = []
     dinnerMinList = []
@@ -99,6 +100,14 @@ def soupCrawl(target_file,area_code,page):
             nameList.append(name.text.replace("\t"," "))
         else:
             nameList.append("-")
+        
+        # eki
+        # 駅の名前
+        eki = r.find("span", class_="list-rst__area-genre cpy-area-genre")
+        if (eki is not None):
+            ekiList.append(eki.text.split()[0])
+        else:
+            ekiList.append("-")    
 
         # rating
         # 評価
@@ -155,7 +164,7 @@ def soupCrawl(target_file,area_code,page):
     result=""
     for i in range(0, len(nameList)):
         text=area_name+"\t"+area_code+"\t"+str(page)+"\t"+nameList[i]+"\t"+\
-             ratingList[i]+"\t"+commentList[i]+"\t"+\
+             ekiList[i]+"\t"+ratingList[i]+"\t"+commentList[i]+"\t"+\
              dinnerMinList[i]+"\t"+dinnerMaxList[i]+"\t"+\
              lunchMinList[i]+"\t"+lunchMaxList[i]+"\t"+\
              dinnerAvgList[i]+"\t"+lunchAvgList[i]+"\t"+\
