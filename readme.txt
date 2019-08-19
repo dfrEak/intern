@@ -13,5 +13,7 @@ python3 crawl.py
 
 python3 cluster.py
 -   cluster.py
-        create some histograms (on progress)
-        いくつかのヒストグラムを作成します（進行中）
+        create some histograms
+        いくつかのヒストグラムを作成します
+        create some clustering using k-mean
+        k-meanを使用してクラスタリングを作成します
